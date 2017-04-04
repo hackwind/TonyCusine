@@ -1,29 +1,5 @@
 [
     {
-        "outputFile": "E:\\Project\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 112,
-                    "endOffset": 163
-                },
-                "from": {
-                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\1c27ad377f68c7160fc25bf7f7b39ac48bf78cec\\output\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 112,
-                        "endOffset": 163
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "F:\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
         "map": [
             {
@@ -35,7 +11,7 @@
                     "endOffset": 163
                 },
                 "from": {
-                    "file": "C:\\Documents and Settings\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "file": "C:\\Users\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

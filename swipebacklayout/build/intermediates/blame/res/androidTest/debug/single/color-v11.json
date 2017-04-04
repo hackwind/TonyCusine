@@ -1,18 +1,10 @@
 [
     {
-        "merged": "E:\\Project\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\90868597740f413905de234ab6837da7acf520dc\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
-    },
-    {
         "merged": "F:\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
     },
     {
         "merged": "F:\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
         "source": "C:\\Users\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
-    },
-    {
-        "merged": "E:\\Project\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\90868597740f413905de234ab6837da7acf520dc\\output\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
     }
 ]

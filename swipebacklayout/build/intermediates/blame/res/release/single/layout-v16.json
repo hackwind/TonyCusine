@@ -1,10 +1,6 @@
 [
     {
-        "merged": "E:\\Project\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\release\\layout-v16\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\Administrator\\.android\\build-cache\\1c27ad377f68c7160fc25bf7f7b39ac48bf78cec\\output\\res\\layout-v16\\notification_template_custom_big.xml"
-    },
-    {
         "merged": "F:\\workspace\\LoveFood\\swipebacklayout\\build\\intermediates\\res\\merged\\release\\layout-v16\\notification_template_custom_big.xml",
-        "source": "C:\\Documents and Settings\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\layout-v16\\notification_template_custom_big.xml"
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\f4069f6f85188d5ccf04d96cfe8cd1efc87d6b33\\output\\res\\layout-v16\\notification_template_custom_big.xml"
     }
 ]
