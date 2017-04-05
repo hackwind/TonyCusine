@@ -15,7 +15,8 @@ public class CuisineDao {
 
     public CuisineDao() {
         try {
-            dao = DataBaseHelper.getHelper().getDao(Cuisine.class);
+//            dao = DataBaseHelper.getHelper().getDao(Cuisine.class);
+            dao = DBHelper.getHelper().getDao(Cuisine.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

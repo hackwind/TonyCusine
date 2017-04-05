@@ -54,6 +54,8 @@ public class Category implements Serializable{
 
     public int getParentCategory() {return this.parentCategory;}
 
+    public void setParentCategory(int parentCategory){this.parentCategory = parentCategory;}
+
     public String getImage() {return this.image;}
 
     public void setImage(String image) {this.image = image;}

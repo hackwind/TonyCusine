@@ -53,6 +53,7 @@ public class CuisineDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTranslucentStatus();
         setContentView(R.layout.activity_suisine_detail);
         cuisineId = getIntent().getIntExtra("cuisine_id",0);
         cusineTypeName = getIntent().getStringExtra("cuisine_type_name");

@@ -13,17 +13,21 @@
 
         <activity android:name="com.tonyhu.cookbook.activity.WelcomeActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name="com.tonyhu.cookbook.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.tonyhu.cookbook.activity.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
         <activity android:name="com.tonyhu.cookbook.activity.CuisineDetailActivity"
             android:screenOrientation="portrait" android:theme="@style/SwipeBackTheme">
+        </activity>
+        <activity android:name="com.tonyhu.cookbook.activity.FoodSubTypeActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

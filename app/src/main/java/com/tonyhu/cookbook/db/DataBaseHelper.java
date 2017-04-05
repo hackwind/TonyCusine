@@ -47,8 +47,10 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource,Cuisine.class);
             TableUtils.createTable(connectionSource,Motto.class);
             TableUtils.createTable(connectionSource,Category.class);
-            initData(sqLiteDatabase);
-            initMottoData(sqLiteDatabase);
+            initData(sqLiteDatabase,"cuisine_type.sql");
+            initData(sqLiteDatabase,"category.sql");
+            initData(sqLiteDatabase,"cuisine.sql");
+            initData(sqLiteDatabase,"motto.sql");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,29 +101,9 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    private void initData(SQLiteDatabase db) {
+    private void initData(SQLiteDatabase db,String sqlName) {
         try {
-            InputStream is = TonyApplication.getContext().getAssets().open("sql.sql");
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-            String line;
-            db.beginTransaction();
-            while ((line = reader.readLine()) != null && !TextUtils.isEmpty(line)) {
-                db.execSQL(line);
-            }
-            db.setTransactionSuccessful();
-            db.endTransaction();
-            is.close();
-            isr.close();
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initMottoData(SQLiteDatabase db) {
-        try {
-            InputStream is = TonyApplication.getContext().getAssets().open("motto.sql");
+            InputStream is = TonyApplication.getContext().getAssets().open(sqlName);
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
             String line;

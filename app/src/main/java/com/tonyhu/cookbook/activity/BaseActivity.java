@@ -20,13 +20,13 @@ public class BaseActivity extends SwipeBackActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTranslucentStatus();
+
         getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
 
     //设置系统状态栏
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setTranslucentStatus()
+    protected void setTranslucentStatus()
     {
         //判断版本是4.4以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)

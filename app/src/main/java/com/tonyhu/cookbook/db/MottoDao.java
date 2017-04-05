@@ -15,7 +15,8 @@ public class MottoDao {
 
     public MottoDao() {
         try {
-            dao = DataBaseHelper.getHelper().getDao(Motto.class);
+//            dao = DataBaseHelper.getHelper().getDao(Motto.class);
+            dao = DBHelper.getHelper().getDao(Motto.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

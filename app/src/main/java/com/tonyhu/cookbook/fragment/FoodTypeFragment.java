@@ -2,10 +2,8 @@ package com.tonyhu.cookbook.fragment;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,17 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tonyhu.cookbook.R;
-import com.tonyhu.cookbook.TonyApplication;
 import com.tonyhu.cookbook.activity.CuisineDetailActivity;
+import com.tonyhu.cookbook.activity.FoodSubTypeActivity;
 import com.tonyhu.cookbook.db.Category;
 import com.tonyhu.cookbook.db.CategoryDao;
-import com.tonyhu.cookbook.db.Cuisine;
-import com.tonyhu.cookbook.db.CuisineDao;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class FoodTypeFragment extends Fragment {
@@ -41,14 +35,18 @@ public class FoodTypeFragment extends Fragment {
     private View rootView;
     private RecyclerView.Adapter adapter;
     private List<Category> cuisineItems;
-    private int type;
+    private int category;
     private String name;
 
     public FoodTypeFragment() {
     }
 
-    public static FoodTypeFragment newInstance(int typeId,String name) {
+    public static FoodTypeFragment newInstance(int category,String name) {
         FoodTypeFragment fragment = new FoodTypeFragment();
+        Bundle args = new Bundle();
+        args.putInt("category",category);
+        args.putString("name",name);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -117,8 +115,13 @@ public class FoodTypeFragment extends Fragment {
     }
 
     private void getData() {
+        if(getArguments() != null) {
+            category = getArguments().getInt("category", 0);
+        } else {
+            category = 0;
+        }
         CategoryDao dao = new CategoryDao();
-        cuisineItems = dao.listByParentCategory(0);
+        cuisineItems = dao.listByParentCategory(category);
         if(cuisineItems == null) {
             return;
         }
@@ -140,8 +143,8 @@ public class FoodTypeFragment extends Fragment {
 
         public void bind(int position) {
             final int finalPosition = position;
-            final Category cuisine = cuisineItems.get(position);
-            String cover = cuisine.getImage();
+            final Category category = cuisineItems.get(position);
+            String cover = category.getImage();
             if(cover == null) {
                 // set default image
                 subImage.setImageResource(R.drawable.default_image);
@@ -151,16 +154,21 @@ public class FoodTypeFragment extends Fragment {
                     subImage.setImageBitmap(bitmap);
                 }
             }
-            subTitle.setText(cuisine.getName());
+            subTitle.setText(category.getName());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
                 public void onClick(View v) {
-//                    Intent intent = new Intent(getActivity(), CuisineDetailActivity.class);
-//                    intent.putExtra("cuisine_id",cuisine.getId());
-//                    intent.putExtra("cuisine_type_name",name);
-//                    intent.putExtra("cuisine_name",cuisine.getName());
-//                    startActivity(intent);
+                    if(category.getParentCategory() == 0) {//顶级分类
+                        Intent intent = new Intent(getActivity(), FoodSubTypeActivity.class);
+                        intent.putExtra("category", category.getCategory());
+                        intent.putExtra("category_name", category.getName());
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getActivity(), CuisineDetailActivity.class);
+                        intent.putExtra("category", category.getCategory());
+                        startActivity(intent);
+                    }
                 }
             });
 
