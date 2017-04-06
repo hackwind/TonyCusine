@@ -17,19 +17,25 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2017/3/27.
+ * Created by Administrator on 2017/4/5.
  */
 
 public class DBHelper  {
     private static  String DATABASE_NAME = "lovefood";
-    private static int VERSION = 1;
+
 
     private static DBHelper mInstance;
     private HashMap<String,Dao> daos = new HashMap<>();
     private AndroidConnectionSource connectionSource;
+    private String DB_PATH;
 
     public DBHelper(Context context) {
-        File dir = new File("/data/data/" + context.getPackageName() + "/databases");
+        if (android.os.Build.VERSION.SDK_INT >= 4.2) {
+            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
+        } else {
+            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        }
+        File dir = new File(DB_PATH);
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -42,7 +48,7 @@ public class DBHelper  {
             }
         }
         SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getPath(), null,
-                SQLiteDatabase.OPEN_READWRITE);
+                SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READWRITE);
         connectionSource = new AndroidConnectionSource(db);
     }
 

@@ -15,8 +15,11 @@ public class Cuisine implements Serializable{
     @DatabaseField(generatedId=true ,columnName="id")
     private Integer id;
 
-    @DatabaseField(columnName="type")
-    private Integer type;
+    @DatabaseField(columnName="cuisine_type")
+    private Integer cuisineType;
+
+    @DatabaseField(columnName="category")
+    private Integer category;
 
     @DatabaseField(columnName="name")
     private String name;
@@ -51,13 +54,17 @@ public class Cuisine implements Serializable{
         this.id = id;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getCuisineType() {
+        return cuisineType;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setCuisineType(Integer cuisineType) {
+        this.cuisineType = cuisineType;
     }
+
+    public Integer getCategory() {return category;}
+
+    public void setCategory(Integer category) {this.category = category;}
 
     public String getName() {
         return name;

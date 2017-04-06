@@ -22,6 +22,8 @@ import com.tonyhu.cookbook.activity.CuisineDetailActivity;
 import com.tonyhu.cookbook.activity.FoodSubTypeActivity;
 import com.tonyhu.cookbook.db.Category;
 import com.tonyhu.cookbook.db.CategoryDao;
+import com.tonyhu.cookbook.db.Cuisine;
+import com.tonyhu.cookbook.db.CuisineDao;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 
@@ -34,7 +36,7 @@ public class FoodTypeFragment extends Fragment {
     private final static int PADDING_INSIDE = 10;
     private View rootView;
     private RecyclerView.Adapter adapter;
-    private List<Category> cuisineItems;
+    private List<Category> categoryItems;
     private int category;
     private String name;
 
@@ -108,7 +110,7 @@ public class FoodTypeFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return cuisineItems == null ? 0 : cuisineItems.size();
+                return categoryItems == null ? 0 : categoryItems.size();
             }
         };
         recyclerView.setAdapter(adapter);
@@ -120,9 +122,11 @@ public class FoodTypeFragment extends Fragment {
         } else {
             category = 0;
         }
-        CategoryDao dao = new CategoryDao();
-        cuisineItems = dao.listByParentCategory(category);
-        if(cuisineItems == null) {
+        if(category == 0) {
+            CategoryDao dao = new CategoryDao();
+            categoryItems = dao.listByParentCategory(category);
+        }
+        if(categoryItems == null) {
             return;
         }
 
@@ -143,7 +147,7 @@ public class FoodTypeFragment extends Fragment {
 
         public void bind(int position) {
             final int finalPosition = position;
-            final Category category = cuisineItems.get(position);
+            final Category category = categoryItems.get(position);
             String cover = category.getImage();
             if(cover == null) {
                 // set default image
@@ -159,16 +163,10 @@ public class FoodTypeFragment extends Fragment {
                 @Override
                 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
                 public void onClick(View v) {
-                    if(category.getParentCategory() == 0) {//顶级分类
-                        Intent intent = new Intent(getActivity(), FoodSubTypeActivity.class);
-                        intent.putExtra("category", category.getCategory());
-                        intent.putExtra("category_name", category.getName());
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(getActivity(), CuisineDetailActivity.class);
-                        intent.putExtra("category", category.getCategory());
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(getActivity(), FoodSubTypeActivity.class);
+                    intent.putExtra("category", category.getCategory());
+                    intent.putExtra("category_name", category.getName());
+                    startActivity(intent);
                 }
             });
 

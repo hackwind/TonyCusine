@@ -9,16 +9,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.activity.CuisineDetailActivity;
+import com.tonyhu.cookbook.activity.FoodSubTypeActivity;
+import com.tonyhu.cookbook.db.Category;
+import com.tonyhu.cookbook.db.CategoryDao;
 import com.tonyhu.cookbook.db.Cuisine;
 import com.tonyhu.cookbook.db.CuisineDao;
 import com.tonyhu.cookbook.util.ImageUtil;
@@ -26,35 +29,31 @@ import com.tonyhu.cookbook.util.ScreenUtil;
 
 import java.util.List;
 
-public class SubCuisineFragment extends Fragment {
-    private final static String TYPE = "type";
-    private final static String NAME = "name";
+public class FoodCuisineFragment extends Fragment {
     private final static int PADDING_OUTSIDE = 20;
     private final static int PADDING_INSIDE = 10;
     private View rootView;
     private RecyclerView.Adapter adapter;
     private List<Cuisine> cuisineItems;
-    private int type;
+    private int category;
     private String name;
 
-    public SubCuisineFragment() {
+    public FoodCuisineFragment() {
     }
 
-    public static SubCuisineFragment newInstance(int typeId,String name) {
-        SubCuisineFragment fragment = new SubCuisineFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(TYPE,typeId);
-        bundle.putString(NAME,name);
-        fragment.setArguments(bundle);
+    public static FoodCuisineFragment newInstance(int category, String name) {
+        FoodCuisineFragment fragment = new FoodCuisineFragment();
+        Bundle args = new Bundle();
+        args.putInt("category",category);
+        args.putString("name",name);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        type = getArguments().getInt(TYPE);
-        name = getArguments().getString(NAME);
-        getData(type);
+        getData();
     }
 
     @Override
@@ -115,17 +114,15 @@ public class SubCuisineFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void getData(int type) {
+    private void getData() {
+        category = getArguments().getInt("category", 0);
+
         CuisineDao dao = new CuisineDao();
-        cuisineItems = dao.listByCuisineType(type);
+        cuisineItems = dao.listByCategory(category);
+
         if(cuisineItems == null) {
             return;
         }
-        //For test
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
 
         if(adapter != null) {
             adapter.notifyDataSetChanged();
@@ -143,13 +140,14 @@ public class SubCuisineFragment extends Fragment {
         }
 
         public void bind(int position) {
+            final int finalPosition = position;
             final Cuisine cuisine = cuisineItems.get(position);
-            String cover = cuisine.getCoverImage();
+            String cover = cuisine.getBannerImage();
             if(cover == null) {
                 // set default image
                 subImage.setImageResource(R.drawable.default_image);
             } else {
-                Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName() , cover);
+                Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName(),cover);
                 if(bitmap != null) {
                     subImage.setImageBitmap(bitmap);
                 }
@@ -160,9 +158,8 @@ public class SubCuisineFragment extends Fragment {
                 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), CuisineDetailActivity.class);
-                    intent.putExtra("cuisine_id",cuisine.getId());
-                    intent.putExtra("cuisine_type_name",name);
-                    intent.putExtra("cuisine_name",cuisine.getName());
+                    intent.putExtra("cuisine_id", cuisine.getId());
+                    intent.putExtra("cuisine_name", cuisine.getName());
                     startActivity(intent);
                 }
             });

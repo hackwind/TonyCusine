@@ -173,7 +173,7 @@ public class CuisineDetailActivity extends BaseActivity {
         }
         String bannerIUrl = cuisine.getBannerImage();
         if(!TextUtils.isEmpty(bannerIUrl)) {
-            Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineTypeName,cusineName,bannerIUrl);
+            Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName,bannerIUrl);
             if(bitmap != null) {
                 bannerView.setImageBitmap(bitmap);
                 int width = ScreenUtil.getScreenWidth();
@@ -246,7 +246,7 @@ public class CuisineDetailActivity extends BaseActivity {
         public void bind(int position) {
            step.setText((position + 1) + "." + steps[position]);
             if(step_images != null && !TextUtils.isEmpty(step_images[position]) && !"null".equals(step_images[position])) {
-                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineTypeName, cusineName, step_images[position]);
+                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
                 if(bitmap != null) {
                     image.setImageBitmap(bitmap);
                     image.setVisibility(View.VISIBLE);

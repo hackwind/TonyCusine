@@ -10,7 +10,7 @@ import com.blunderer.materialdesignlibrary.models.ViewPagerItem;
 import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.db.Category;
 import com.tonyhu.cookbook.db.CategoryDao;
-import com.tonyhu.cookbook.fragment.FoodTypeFragment;
+import com.tonyhu.cookbook.fragment.FoodCuisineFragment;
 import com.tonyhu.cookbook.pageslidinglibrary.PagerSlidingTabStrip;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class FoodSubTypeActivity extends BaseActivity {
         }
         ViewPagerHandler handler = new ViewPagerHandler();
         for(Category category : categories) {
-            handler.addPage(category.getName(), FoodTypeFragment.newInstance(category.getCategory(), category.getName()));
+            handler.addPage(category.getName(), FoodCuisineFragment.newInstance(category.getCategory(), category.getName()));
         }
         return handler.getViewPagerItems();
     }

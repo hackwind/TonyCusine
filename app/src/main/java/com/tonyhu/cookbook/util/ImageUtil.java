@@ -14,10 +14,10 @@ import java.io.InputStream;
 
 public class ImageUtil {
 
-    public static Bitmap getAssetsBitmap(String typeName,String cuisineName,String picName) {
+    public static Bitmap getAssetsBitmap(String cuisineName,String picName) {
         InputStream is = null;
         try {
-            is = TonyApplication.getContext().getAssets().open("菜谱/" + typeName + "/" + cuisineName + "/pic/"  + picName);
+            is = TonyApplication.getContext().getAssets().open("菜谱/" + cuisineName + "/pic/"  + picName);
             Bitmap bitmap = BitmapFactory.decodeStream(is);
             return bitmap;
         } catch (IOException e) {

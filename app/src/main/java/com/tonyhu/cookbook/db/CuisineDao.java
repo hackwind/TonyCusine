@@ -48,9 +48,18 @@ public class CuisineDao {
         }
     }
 
-    public List<Cuisine> listByType(int type) {
+    public List<Cuisine> listByCuisineType(int type) {
         try {
-            return  dao.queryBuilder().where().eq("type",type).query();
+            return  dao.queryBuilder().where().eq("cuisine_type",type).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Cuisine> listByCategory(int category) {
+        try {
+            return  dao.queryBuilder().where().eq("category",category).query();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
