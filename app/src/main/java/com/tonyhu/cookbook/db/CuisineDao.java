@@ -75,6 +75,15 @@ public class CuisineDao {
         }
     }
 
+    public List<Cuisine> search(String keyword) {
+        try {
+            return  dao.queryBuilder().where().like("name","%" + keyword + "%").query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void update(Cuisine t){
         try {
             dao.update(t);

@@ -10,12 +10,18 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.db.Cuisine;
@@ -34,26 +40,55 @@ public class SearchActivity extends BaseActivity {
     private final static int PADDING_INSIDE = 10;
     private RecyclerView.Adapter adapter;
     private List<Cuisine> cuisineItems;
-
+    private EditText editText;
+    private RecyclerView recyclerView;
+    private LinearLayout noResult;
+    private TextView cancel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_search);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle(R.string.drawer_favorite);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         initView();
-        getData();
     }
 
     private void initView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listview);
+        editText = (EditText)findViewById(R.id.keyword);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String keyword = editText.getText().toString();
+                    if(!TextUtils.isEmpty(keyword)) {
+                        searchData(keyword);
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        noResult = (LinearLayout)findViewById(R.id.no_result);
+
+        cancel = (TextView)findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.getText().clear();
+                editText.clearFocus();
+            }
+        });
+
+        recyclerView = (RecyclerView) findViewById(R.id.listview);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         layoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -100,15 +135,19 @@ public class SearchActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void getData() {
+    private void searchData(String keyword) {
         CuisineDao dao = new CuisineDao();
-        cuisineItems = dao.listFavorites();
-        if(cuisineItems == null) {
-            return;
-        }
+        cuisineItems = dao.search(keyword);
 
-        if(adapter != null) {
-            adapter.notifyDataSetChanged();
+
+        adapter.notifyDataSetChanged();
+        if(cuisineItems == null || cuisineItems.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            noResult.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            noResult.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

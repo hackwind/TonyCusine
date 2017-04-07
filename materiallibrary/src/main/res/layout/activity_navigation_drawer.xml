@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:gravity="right|center_vertical"
-            android:background="@drawable/shape_round_corner_white">
+            android:background="@drawable/shape_round_corner_white"
+            android:stateListAnimator="@animator/touch_raise">
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"

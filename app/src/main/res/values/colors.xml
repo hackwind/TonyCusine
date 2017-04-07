@@ -10,5 +10,6 @@
     <color name="fragment_background">#F4F4F4</color>
     <color name="cardview_color">#ffffff</color>
 
+    <color name="hint_color">#666666</color>
     <color name="detail_title">#202020</color>
 </resources>
