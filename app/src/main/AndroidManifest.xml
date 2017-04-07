@@ -29,6 +29,12 @@
         <activity android:name="com.tonyhu.cookbook.activity.FoodSubTypeActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name="com.tonyhu.cookbook.activity.MyFavoriteActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.tonyhu.cookbook.activity.SearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

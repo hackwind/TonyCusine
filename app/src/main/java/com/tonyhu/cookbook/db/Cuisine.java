@@ -27,9 +27,6 @@ public class Cuisine implements Serializable{
     @DatabaseField(columnName="ingredients")
     private String ingredients;
 
-    @DatabaseField(columnName="cover_image")
-    private String coverImage;
-
     @DatabaseField(columnName="step_image")
     private String stepImage;
 
@@ -80,14 +77,6 @@ public class Cuisine implements Serializable{
 
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
-    }
-
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
     }
 
     public String getStepImage() {

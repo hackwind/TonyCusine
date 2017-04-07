@@ -8,7 +8,28 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:background="?attr/colorPrimary" >
+        <LinearLayout
+            android:id="@+id/expanded_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:gravity="right|center_vertical"
+            android:background="@drawable/shape_round_corner_white">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawablePadding="15dp"
+                android:layout_marginLeft="5dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:textColor="#666666"
+                android:text="搜索菜谱"/>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

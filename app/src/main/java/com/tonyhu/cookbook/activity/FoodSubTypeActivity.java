@@ -3,6 +3,8 @@ package com.tonyhu.cookbook.activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.blunderer.materialdesignlibrary.adapters.ViewPagerWithTabsAdapter;
 import com.blunderer.materialdesignlibrary.handlers.ViewPagerHandler;
@@ -32,6 +34,13 @@ public class FoodSubTypeActivity extends BaseActivity {
 
         category = getIntent().getIntExtra("category",0);
         categoryName = getIntent().getStringExtra("category_name");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle(categoryName);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         initView();
     }

@@ -43,7 +43,6 @@ public class CuisineDetailActivity extends BaseActivity {
     private String[] steps;
     private String[] step_images;
     private int cuisineId;
-    private String cusineTypeName;
     private String cusineName;
     private int isFavor = 0;
 
@@ -56,7 +55,6 @@ public class CuisineDetailActivity extends BaseActivity {
         setTranslucentStatus();
         setContentView(R.layout.activity_suisine_detail);
         cuisineId = getIntent().getIntExtra("cuisine_id",0);
-        cusineTypeName = getIntent().getStringExtra("cuisine_type_name");
         cusineName = getIntent().getStringExtra("cuisine_name");
         initView();
         getData();

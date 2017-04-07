@@ -66,6 +66,15 @@ public class CuisineDao {
         }
     }
 
+    public List<Cuisine> listFavorites() {
+        try {
+            return  dao.queryBuilder().where().eq("is_favorite",1).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void update(Cuisine t){
         try {
             dao.update(t);

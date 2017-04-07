@@ -57,7 +57,8 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:paddingRight="@dimen/padding_detail"
-            android:paddingLeft="@dimen/padding_detail">
+            android:paddingLeft="@dimen/padding_detail"
+            android:layout_marginBottom="@dimen/padding_detail">
             <TextView
                 android:id="@+id/detail_steps"
                 android:layout_width="wrap_content"

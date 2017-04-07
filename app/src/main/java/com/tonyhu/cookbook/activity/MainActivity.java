@@ -1,6 +1,10 @@
 package com.tonyhu.cookbook.activity;
 
+import android.content.Intent;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerBottomHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerTopHandler;
@@ -10,11 +14,22 @@ import com.tonyhu.cookbook.db.MottoDao;
 import com.tonyhu.cookbook.fragment.MainFragment;
 import com.tonyhu.cookbook.R;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity {
+
+    @Override
+    protected View.OnClickListener getMenuItemClickListener(){
+        return new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchActivity.class);
+            }
+        };
+    }
 
     @Override
     protected NavigationDrawerTopHandler getNavigationDrawerTopHandler() {
@@ -49,10 +64,28 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            TextView tvTitle = (TextView) view.findViewById(R.id.navigation_drawer_row_title);
+            if(tvTitle == null) return;
+            CharSequence title = tvTitle.getText();
+            if(title.equals(getString(R.string.drawer_favorite))) {
+                startActivity(MyFavoriteActivity.class);
+            } else if(title.equals(getString(R.string.drawer_feedback))) {
 
+            } else if(title.equals(getString(R.string.drawer_favorite))) {
+
+            } else if(title.equals(getString(R.string.drawer_update))) {
+
+            } else if(title.equals(getString(R.string.drawer_about))) {
+
+            }
         }
     };
-//
+
+    private void startActivity(Class cls) {
+        Intent intent = new Intent(this,cls);
+        startActivity(intent);
+    }
+
     private String getTip(int hour) {
         if(hour > 20) {
             return "主人，晚上好";
