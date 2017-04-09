@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 
 import com.tonyhu.cookbook.TonyApplication;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,7 +19,7 @@ public class ImageUtil {
     public static Bitmap getAssetsBitmap(String cuisineName,String picName) {
         InputStream is = null;
         try {
-            is = TonyApplication.getContext().getAssets().open("菜谱/" + cuisineName + "/pic/"  + picName);
+            is = TonyApplication.getContext().getAssets().open("菜谱/" + cuisineName + "/"  + picName);
             Bitmap bitmap = BitmapFactory.decodeStream(is);
             return bitmap;
         } catch (IOException e) {

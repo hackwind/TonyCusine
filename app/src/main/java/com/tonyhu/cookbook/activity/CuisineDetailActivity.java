@@ -2,14 +2,11 @@ package com.tonyhu.cookbook.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +17,14 @@ import android.widget.TextView;
 import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.db.Cuisine;
 import com.tonyhu.cookbook.db.CuisineDao;
+import com.tonyhu.cookbook.db.Ingredients;
+import com.tonyhu.cookbook.db.IngredientsDao;
+import com.tonyhu.cookbook.db.Step;
+import com.tonyhu.cookbook.db.StepDao;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
+
+import java.util.List;
 
 
 /*Created by Administrator on 2017/3/29.
@@ -46,8 +49,11 @@ public class CuisineDetailActivity extends BaseActivity {
     private String cusineName;
     private int isFavor = 0;
 
-    private CuisineDao dao;
+    private CuisineDao cuisineDao;
     private Cuisine cuisine;
+
+    private StepDao stepDao;
+    private IngredientsDao ingredientsDao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -154,9 +160,9 @@ public class CuisineDetailActivity extends BaseActivity {
             addFavoriteAnim.setText(R.string.add_favorite);
             addFavorite.setImageResource(R.drawable.add_favorite);
         }
-        if(dao != null && cuisine != null) {
+        if(cuisineDao != null && cuisine != null) {
             cuisine.setIsFavorite(status);
-            dao.update(cuisine);
+            cuisineDao.update(cuisine);
         }
     }
 
@@ -164,8 +170,8 @@ public class CuisineDetailActivity extends BaseActivity {
         if(cuisineId <= 0) {
             return;
         }
-        dao = new CuisineDao();
-        cuisine = dao.get(cuisineId);
+        cuisineDao = new CuisineDao();
+        cuisine = cuisineDao.get(cuisineId);
         if(cuisine == null) {
             return ;
         }
@@ -189,27 +195,31 @@ public class CuisineDetailActivity extends BaseActivity {
             addFavorite.setImageResource(R.drawable.add_favorite);
         }
 
-        String material = cuisine.getIngredients();
-        if(!TextUtils.isEmpty(material)) {
-            String[] materials = material.split(";");
-            String[] nameValue;
-            materialsNames = new String[materials.length];
-            materialsValues = new String[materials.length];
-            for(int i = 0; i < materials.length;i++){
-                nameValue = materials[i].split(":");
-                materialsNames[i] = nameValue[0];
-                materialsValues[i] = nameValue[1];
+        ingredientsDao = new IngredientsDao();
+        List<Ingredients> ingredientses = ingredientsDao.listByName(cuisine.getName());
+        if(ingredientses != null && ingredientses.size() > 0) {
+            materialsNames = new String[ingredientses.size()];
+            materialsValues = new String[ingredientses.size()];
+            int i = 0;
+            for(Ingredients ingredients : ingredientses){
+                materialsNames[i] = ingredients.getKey();
+                materialsValues[i] = ingredients.getValue();
+                i++;
             }
         }
 
-        String step = cuisine.getSteps();
-        if(!TextUtils.isEmpty(step)){
-            steps = step.split("。");
-        }
+        stepDao = new StepDao();
+        List<Step> sps = stepDao.listByName(cuisine.getName());
 
-        String stepImg = cuisine.getStepImage();
-        if(!TextUtils.isEmpty(stepImg)) {
-            step_images = stepImg.split(";");
+        if(sps != null && sps.size() > 0) {
+            steps = new String[sps.size()];
+            step_images = new String[sps.size()];
+            int i = 0;
+            for(Step s : sps){
+                steps[i] = s.getStep();
+                step_images[i] = s.getPic();
+                i++;
+            }
         }
     }
 

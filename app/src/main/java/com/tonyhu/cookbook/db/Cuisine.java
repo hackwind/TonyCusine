@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 @DatabaseTable(tableName = "cuisine")
 public class Cuisine implements Serializable{
+    public final static String STEP_NAME = "name";
+    public final static String INGREDIENTS_NAME = "name";
     private static final long serialVersionUID = 12345688l;
     @DatabaseField(generatedId=true ,columnName="id")
     private Integer id;
@@ -24,17 +26,8 @@ public class Cuisine implements Serializable{
     @DatabaseField(columnName="name")
     private String name;
 
-    @DatabaseField(columnName="ingredients")
-    private String ingredients;
-
-    @DatabaseField(columnName="step_image")
-    private String stepImage;
-
     @DatabaseField(columnName="banner_image")
     private String bannerImage;
-
-    @DatabaseField(columnName="steps")
-    private String steps;
 
     @DatabaseField(columnName = "is_favorite")
     private int isFavorite;
@@ -71,36 +64,12 @@ public class Cuisine implements Serializable{
         this.name = name;
     }
 
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getStepImage() {
-        return stepImage;
-    }
-
-    public void setStepImage(String stepImage) {
-        this.stepImage = stepImage;
-    }
-
     public String getBannerImage() {
         return bannerImage;
     }
 
     public void setBannerImage(String bannerImage) {
         this.bannerImage = bannerImage;
-    }
-
-    public String getSteps() {
-        return steps;
-    }
-
-    public void setSteps(String steps) {
-        this.steps = steps;
     }
 
     public int getIsFavorite() { return isFavorite; }
