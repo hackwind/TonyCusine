@@ -34,6 +34,9 @@
         <activity android:name="com.tonyhu.cookbook.activity.SearchActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name="com.tonyhu.cookbook.activity.AboutActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

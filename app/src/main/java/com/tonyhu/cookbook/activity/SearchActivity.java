@@ -2,6 +2,7 @@ package com.tonyhu.cookbook.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -94,12 +96,12 @@ public class SearchActivity extends BaseActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new RecyclerView.Adapter<Holder>() {
-            @Override
-            public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-                @SuppressLint("InflateParams")
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_subcuisine_list, null);
-                return new Holder(view);
-            }
+                @Override
+                public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+                    @SuppressLint("InflateParams")
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_subcuisine_list, null);
+                    return new Holder(view);
+                }
 
             @Override
             public void onBindViewHolder(Holder holder, int position) {
@@ -133,6 +135,17 @@ public class SearchActivity extends BaseActivity {
             }
         };
         recyclerView.setAdapter(adapter);
+
+        if(!this.isFinishing()) {
+            editText.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    editText.requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.showSoftInput(editText,0);
+                }
+            },1000);
+        }
     }
 
     private void searchData(String keyword) {

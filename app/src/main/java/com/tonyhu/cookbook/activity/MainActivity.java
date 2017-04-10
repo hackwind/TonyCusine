@@ -76,7 +76,7 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
             } else if(title.equals(getString(R.string.drawer_update))) {
 
             } else if(title.equals(getString(R.string.drawer_about))) {
-
+                startActivity(AboutActivity.class);
             }
         }
     };
