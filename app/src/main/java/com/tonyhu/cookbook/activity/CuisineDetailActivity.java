@@ -2,6 +2,7 @@ package com.tonyhu.cookbook.activity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tonyhu.cookbook.R;
@@ -23,6 +25,7 @@ import com.tonyhu.cookbook.db.Step;
 import com.tonyhu.cookbook.db.StepDao;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
+import com.tonyhu.cookbook.widget.TonyScrollView;
 
 import java.util.List;
 
@@ -30,16 +33,18 @@ import java.util.List;
 /*Created by Administrator on 2017/3/29.
  */
 
-public class CuisineDetailActivity extends BaseActivity {
-
+public class CuisineDetailActivity extends BaseActivity implements TonyScrollView.OnScrollListener{
+    private TonyScrollView rootView;
     private ImageView bannerView;
-    private TextView title;
+    private TextView cuisineName;
     private RecyclerView ryMaterials;
     private RecyclerView rySteps;
     private RecyclerView.Adapter materialAdapter;
     private RecyclerView.Adapter stepsAdapter;
     private ImageView addFavorite;
     private TextView addFavoriteAnim;
+    private LinearLayout toolbar;
+    private TextView title;
 
     private String[] materialsNames;
     private String[] materialsValues;
@@ -54,6 +59,7 @@ public class CuisineDetailActivity extends BaseActivity {
 
     private StepDao stepDao;
     private IngredientsDao ingredientsDao;
+    private int oldColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,8 +73,10 @@ public class CuisineDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        toolbar = (LinearLayout) findViewById(R.id.my_toolbar);
+        title = (TextView)toolbar.findViewById(R.id.title);
         bannerView = (ImageView)findViewById(R.id.detail_banner);
-        title = (TextView)findViewById(R.id.detail_title);
+        cuisineName = (TextView)findViewById(R.id.detail_title);
         ryMaterials = (RecyclerView)findViewById(R.id.detail_recycleview_material);
         rySteps = (RecyclerView)findViewById(R.id.detail_recycleview_steps);
         addFavorite = (ImageView)findViewById(R.id.detail_addFavorite);
@@ -149,6 +157,10 @@ public class CuisineDetailActivity extends BaseActivity {
 
             }
         });
+
+        rootView = (TonyScrollView)findViewById(R.id.rootview);
+        rootView.scrollTo(0,0);
+        rootView.setOnScrollListener(this);
     }
 
     private void updateFavorStatus(int status) {
@@ -188,6 +200,7 @@ public class CuisineDetailActivity extends BaseActivity {
                 bannerView.setLayoutParams(params);
             }
         }
+        cuisineName.setText(cuisine.getName());
         title.setText(cuisine.getName());
 
         isFavor = cuisine.getIsFavorite();
@@ -221,6 +234,23 @@ public class CuisineDetailActivity extends BaseActivity {
                 i++;
             }
         }
+    }
+
+    @Override
+    public void onScroll(int y) {
+        float height = (int) (bannerView.getHeight() * 0.6);
+        float fTemp = ((float) y) / height;
+        if (fTemp > 1)
+            fTemp = 1;
+        if (fTemp <= 0)
+            fTemp = 0;
+        String hex = Integer.toHexString((int) (255 * fTemp));
+        if (hex.length() == 1)
+            hex = "0".concat(hex);
+        oldColor = Color.parseColor("#".concat(hex).concat("e64e40"));
+        toolbar.setBackgroundColor(oldColor);
+        oldColor = Color.parseColor("#".concat(hex).concat("ffffff"));
+        title.setTextColor(oldColor);
     }
 
     class MaterialHolder extends RecyclerView.ViewHolder {
