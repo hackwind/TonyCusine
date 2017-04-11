@@ -49,57 +49,57 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@android:color/white">
-            <LinearLayout
-                android:id="@+id/drawer_tip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DA7888"
-                android:gravity="center_horizontal"
-                android:layout_alignParentTop="true"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-                <TextView
-                    android:id="@+id/drawer_tip_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/drawer_tip"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/every_day"
-                    android:textColor="#DA7888"
-                    android:textStyle="italic"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="16sp"/>
-                <TextView
-                    android:id="@+id/life_motto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#DA7888"
-                    android:layout_gravity="center_horizontal"
-                    android:lineSpacingExtra="6dp"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:id="@+id/drawer_tip"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#DA7888"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:paddingBottom="5dp"-->
+                <!--android:paddingTop="5dp">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/drawer_tip_text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"/>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_below="@id/drawer_tip"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/every_day"-->
+                    <!--android:textColor="#DA7888"-->
+                    <!--android:textStyle="italic"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:textSize="16sp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/life_motto"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#DA7888"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:lineSpacingExtra="6dp"-->
+                    <!--android:textSize="16sp"/>-->
+            <!--</LinearLayout>-->
             <ListView
                 android:id="@+id/left_drawer_bottom_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:choiceMode="singleChoice"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                android:background="@android:color/white"
+                android:divider="@android:color/black"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:dividerHeight="1px"
                 android:elevation="13dp" />
 
 

@@ -31,7 +31,7 @@ public abstract class NavigationDrawerActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private View mDrawerLeft;
-    private TextView mTip;
+//    private TextView mTip;
     private TextView mMotto;
 
     @Override
@@ -48,8 +48,8 @@ public abstract class NavigationDrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mTip = (TextView) findViewById(R.id.drawer_tip_text);
-        mMotto = (TextView) findViewById(R.id.life_motto);
+//        mTip = (TextView) findViewById(R.id.drawer_tip_text);
+//        mMotto = (TextView) findViewById(R.id.life_motto);
 
         mDrawerLeft = findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -62,12 +62,12 @@ public abstract class NavigationDrawerActivity extends AppCompatActivity {
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                NavigationDrawerTopHandler navigationDrawerTopHandler = getNavigationDrawerTopHandler();
-                if (navigationDrawerTopHandler != null && navigationDrawerTopHandler.getNavigationDrawerTopTip() != null
-                        && navigationDrawerTopHandler.getNavigationDrawerTopMotto() != null) {
-                    mTip.setText(navigationDrawerTopHandler.getNavigationDrawerTopTip());
-                    mMotto.setText(navigationDrawerTopHandler.getNavigationDrawerTopMotto());
-                }
+//                NavigationDrawerTopHandler navigationDrawerTopHandler = getNavigationDrawerTopHandler();
+//                if (navigationDrawerTopHandler != null && navigationDrawerTopHandler.getNavigationDrawerTopTip() != null
+//                        && navigationDrawerTopHandler.getNavigationDrawerTopMotto() != null) {
+//                    mTip.setText(navigationDrawerTopHandler.getNavigationDrawerTopTip());
+//                    mMotto.setText(navigationDrawerTopHandler.getNavigationDrawerTopMotto());
+//                }
             }
 
         };
