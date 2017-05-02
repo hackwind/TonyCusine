@@ -45,13 +45,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private void initView(View view) {
         tabs = new String[]{
                 getResources().getString(R.string.tab_title_cuisine),
-                getResources().getString(R.string.tab_title_foodtype),
-                getResources().getString(R.string.tab_title_nutrition)
+                getResources().getString(R.string.tab_title_foodtype)
         };
         cls = new Class[]{
                 CuisineFragment.class,
-                FoodTypeFragment.class,
-                NutritionFragment.class
+                FoodTypeFragment.class
         };
 
 

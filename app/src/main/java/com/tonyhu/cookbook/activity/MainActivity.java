@@ -1,17 +1,25 @@
 package com.tonyhu.cookbook.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerBottomHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerTopHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationMainContentHandler;
+import com.qihoo.appstore.common.updatesdk.lib.UpdateHelper;
 import com.tonyhu.cookbook.fragment.MainFragment;
 import com.tonyhu.cookbook.R;
 
 
 public class MainActivity extends com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity {
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        UpdateHelper.getInstance().init(getApplicationContext(), Color.parseColor("#0A93DB"));
+    }
 
     @Override
     protected View.OnClickListener getMenuItemClickListener(){
@@ -62,11 +70,11 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
             if(title.equals(getString(R.string.drawer_favorite))) {
                 startActivity(MyFavoriteActivity.class);
             } else if(title.equals(getString(R.string.drawer_feedback))) {
-
-            } else if(title.equals(getString(R.string.drawer_favorite))) {
-
+                startActivity(FeedBackActivity.class);
+            } else if(title.equals(getString(R.string.drawer_reward))) {
+                startActivity(RewardActivity.class);
             } else if(title.equals(getString(R.string.drawer_update))) {
-
+                UpdateHelper.getInstance().manualUpdate(getPackageName());
             } else if(title.equals(getString(R.string.drawer_about))) {
                 startActivity(AboutActivity.class);
             }

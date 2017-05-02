@@ -122,10 +122,10 @@ public class SubCuisineFragment extends Fragment {
             return;
         }
         //For test
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
-        cuisineItems.addAll(cuisineItems);
+//        cuisineItems.addAll(cuisineItems);
+//        cuisineItems.addAll(cuisineItems);
+//        cuisineItems.addAll(cuisineItems);
+//        cuisineItems.addAll(cuisineItems);
 
         if(adapter != null) {
             adapter.notifyDataSetChanged();
