@@ -53,7 +53,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/main_title_normal"
-            android:textSize="12sp"/>
+            android:textSize="18sp"/>
         <com.tonyhu.cookbook.widget.VerticalScrollTextView
             android:id="@+id/thanks"
             android:layout_width="match_parent"
