@@ -11,35 +11,23 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 public class ScrollTextView extends android.support.v7.widget.AppCompatTextView {
-    /**
-     * ÿ�е��ַ���
-     */
+
     ArrayList<String> lineStrings;
 
-    /**
-     * ��ǰ��λ��
-     */
+
     float currentY;
 
-    /**
-     * ���������Ϣ
-     */
+
     Handler handler;
 
-    /**
-     * Ҫ��ʾ��text
-     */
+
     String scrollText="";
     
 
-    /**
-     * ��ʵ���,������width="xxdp"��������
-     */
+
     private int exactlyWidth = -1;
 
-    /**
-     * ��ʵ�߶�,������height="xxdip"��������
-     */
+
     private int exactlyHeight = -1;
 
     public String getScrollText() {
@@ -51,9 +39,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         reset();
     }
 
-    /**
-     * ����
-     */
+
     private void reset() {
         requestLayout();
         invalidate();
@@ -77,36 +63,24 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         init();
     }
 
-    /**
-     * �Ƿ��ڹ���
-     */
+
     boolean scrolling = false;
 
-    /**
-     * ʵ�ʸ߶ȣ���������ʾ��ȫ��Ҫ�ĸ߶�
-     */
-    float absloutHeight = 0;
 
-    /**
-     * handler����Ϣ��ʱ����
-     */
+    float absolutHeight = 0;
+
     int delayTime = 10;
 
-    /**
-     * ÿ�ι����ľ���
-     */
+
     float speed = 0.5f;
 
-    /**
-     * ��ʼ��
-     */
     void init() {
 
         handler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
-                if (absloutHeight <= getHeight()) {
+                if (absolutHeight <= getHeight()) {
                     currentY = 0;
                     stop();
                     return;
@@ -132,11 +106,9 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
 
             }
 
-            /**
-             * ����currentY����currentY����absloutHeightʱ����������Ϊ0��
-             */
+
             private void resetCurrentY() {
-                if (currentY >= absloutHeight || currentY <= -absloutHeight || getHeight() <= 0) {
+                if (currentY >= absolutHeight || currentY <= -absolutHeight || getHeight() <= 0) {
                     currentY = 0;
                 }
 
@@ -145,14 +117,10 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         
     }
 
-    /**
-     * �ϴδ����¼�����ָy����
-     */
+
     float lastY = 0;
 
-    /**
-     * Ϊtrue����ԭ���ǹ���
-     */
+
     boolean needStop;
 
     public void pause() {
@@ -205,18 +173,14 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         return super.onTouchEvent(event);
     }
 
-    /**
-     * ����ָ�ƶ��˴�С�ľ������ڣ�����Ϊ�ǹ���״̬�ı���¼������ڸ�ֵ��������ָ����
-     */
+
     public static final long performUpScrollStateDistance = 5;
 
     public float distanceY = 0;
 
     public float distanceX = 0;
 
-    /**
-     * ���Ĺ���״̬
-     */
+
     public void updateScrollStatus() {
 
         if (scrolling) {
@@ -226,9 +190,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         }
     }
 
-    /**
-     * ��ʼ����
-     */
+
     public void play() {
 
         if (!scrolling) {
@@ -237,9 +199,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         }
     }
 
-    /**
-     * ֹͣ����
-     */
+
     public void stop() {
         if (scrolling) {
             handler.removeMessages(0);
@@ -253,7 +213,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         int height = MeasureHeight(width, heightMeasureSpec);
         setMeasuredDimension(width, height);
         currentY = 0;
-        if (height < absloutHeight) {
+        if (height < absolutHeight) {
             play();
         } else {
             stop();
@@ -261,16 +221,11 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
 
     }
 
-    /**
-     * �������
-     * 
-     * @param widthMeasureSpec
-     * @return
-     */
+
     private int MeasureWidth(int widthMeasureSpec) {
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        // �����wrap_content
+
         if (mode == MeasureSpec.AT_MOST) {
 
             double abwidth = getPaint().measureText(scrollText);
@@ -284,24 +239,18 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         return width;
     }
 
-    /**
-     * �����߶�
-     * 
-     * @param width:���
-     * @param heightMeasureSpec
-     * @return
-     */
+
     private int MeasureHeight(int width, int heightMeasureSpec) {
         int mode = MeasureSpec.getMode(heightMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         generateTextList(width);
         int lines = lineStrings.size();
 
-        absloutHeight = lines * getLineHeight() + getPaddingBottom() + getPaddingTop();
-        // �����wrap_content
+        absolutHeight = lines * getLineHeight() + getPaddingBottom() + getPaddingTop();
+
         if (mode == MeasureSpec.AT_MOST) {
 
-            height = (int)Math.min(absloutHeight, height);
+            height = (int)Math.min(absolutHeight, height);
             exactlyHeight = -1;
 
         } else if (mode == MeasureSpec.EXACTLY) {
@@ -310,13 +259,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         return height;
     }
 
-    /**
-     * �Ƿ�ΪӢ�ĵ��ʵ�����ĸ
-     * 
-     * @param str
-     * @param i
-     * @return
-     */
+
     boolean isENWordStart(String str, int i) {
 
         if (i == 0) {
@@ -328,28 +271,21 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         return false;
     }
 
-    /**
-     * ��ȡһ�е��ַ�
-     * 
-     * @param MaxWidth
-     * @param str
-     * @return
-     */
+
     private String getLineText(int MaxWidth, String str) {
 
-        // ��ʵ��
+
         StringBuffer trueStringBuffer = new StringBuffer();
-        // ��ʱ��
+
         StringBuffer tempStringBuffer = new StringBuffer();
 
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             String add = "";
-            // ���c����ĸ��Ҫ����Ӣ�ĵ��ʻ��й���
             if (!isChinese(c) && isENWordStart(str, i)) {
 
                 int place = getNextSpecePlace(i, str);
-                // �ҵ���һ���ո�
+
                 if (place > -1) {
                     add = str.substring(i, place) + " ";
                     if (getPaint().measureText(add) > MaxWidth) {
@@ -381,13 +317,6 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
 
     }
 
-    /**
-     * �ҵ���һ���ո�ĵط�
-     * 
-     * @param i
-     * @param str
-     * @return
-     */
     int getNextSpecePlace(int i, String str) {
 
         for (int j = i; j < str.length(); j++) {
@@ -400,21 +329,21 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         return -1;
     }
 
-    /**
-     * ���ɶ����ַ����б�
-     * 
-     * @param MaxWidth
-     */
+
     public void generateTextList(int MaxWidth) {
         lineStrings = new ArrayList<String>();
         String remain = scrollText;
-
+        //加上几行空格，隔开连续两次循环
+        lineStrings.add(" ");
+        lineStrings.add(" ");
+        lineStrings.add(" ");
         while (!remain.equals("")) {
             String line = getLineText(MaxWidth, remain);
             lineStrings.add(line);
             remain = remain.substring(line.length(), remain.length());
 
         }
+
     };
 
     @Override
@@ -424,7 +353,7 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
         float x = getPaddingLeft();
         float y = getPaddingTop();
 
-        float lineHeight = getLineHeight();
+        float lineHeight = getLineHeight() ;
         float textSize = getPaint().getTextSize();
 
         for (int i = 0; i < lineStrings.size(); i++) {
@@ -432,32 +361,25 @@ public class ScrollTextView extends android.support.v7.widget.AppCompatTextView 
 
             float min = 0;
             if (exactlyHeight > -1) {
-                min = Math.min(min, exactlyHeight - absloutHeight);
+                min = Math.min(min, exactlyHeight - absolutHeight);
             }
             if (y < min) {
 
-                y = y + absloutHeight;
+                y = y + absolutHeight;
 
             } else if (y >= min && y < textSize + min) {
 
-                //�����˵������Ѿ�������Ҫѭ�������������ʱ��
-                canvas.drawText(lineStrings.get(i), x, y + absloutHeight, getPaint());
+                canvas.drawText(lineStrings.get(i), x, y + absolutHeight, getPaint());
             }
-            if (y >= absloutHeight) {
-                //�����׶˵������Ѿ�������Ҫѭ�������������ʱ��
+            if (y >= absolutHeight) {
                 canvas.drawText(lineStrings.get(i), x, y, getPaint());
-                y = y - absloutHeight;
+                y = y - absolutHeight;
             }
             canvas.drawText(lineStrings.get(i), x, y, getPaint());
         }
     }
 
-    /**
-     * �ж��Ƿ�Ϊ����
-     * 
-     * @param c
-     * @return
-     */
+
     private static final boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS

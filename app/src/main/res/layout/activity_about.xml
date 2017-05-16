@@ -61,6 +61,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center_horizontal"
+            android:lineSpacingExtra="5dp"
             android:textColor="@color/main_title_normal" />
         <TextView
             android:id="@+id/reward"

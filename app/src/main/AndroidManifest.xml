@@ -49,6 +49,9 @@
         <activity android:name="com.tonyhu.cookbook.activity.RewardActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name="com.tonyhu.cookbook.activity.PhotoViewActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <activity
             android:name="com.qihoo.appstore.common.updatesdk.lib.UpdateTipDialogActivity"

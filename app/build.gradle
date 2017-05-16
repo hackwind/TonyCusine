@@ -35,4 +35,5 @@ dependencies {
     compile files('libs/ormlite-core-5.0.jar')
     compile project(':swipebacklayout')
     compile files('libs/360update-7.0.3.jar')
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
 }
