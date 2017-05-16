@@ -28,9 +28,9 @@ import java.util.List;
 
 public abstract class NavigationDrawerActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    protected DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private View mDrawerLeft;
+    protected View mDrawerLeft;
 //    private TextView mTip;
     private TextView mMotto;
 

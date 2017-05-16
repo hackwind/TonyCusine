@@ -53,16 +53,16 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/main_title_normal"
-            android:textSize="12sp"/>
-        <com.tonyhu.cookbook.widget.VerticalScrollTextView
+            android:textSize="18sp"/>
+        <com.tonyhu.cookbook.widget.ScrollTextView
             android:id="@+id/thanks"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/main_title_normal"
-            android:text="@string/thanks_content" />
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/main_title_normal" />
         <TextView
             android:id="@+id/reward"
             android:layout_width="50dp"

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tonyhu.cookbook.R;
+import com.tonyhu.cookbook.activity.MainActivity;
 
 public class MainFragment extends Fragment implements View.OnClickListener{
     private View rootView;
@@ -85,7 +86,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.button3:
                 onButton3Click();
-                mTabHost.setCurrentTabByTag(tabs[2]);
+//                mTabHost.setCurrentTabByTag(tabs[2]);
+                MainActivity main = (MainActivity)getActivity();
+                main.openDrawer();
                 break;
         }
     }

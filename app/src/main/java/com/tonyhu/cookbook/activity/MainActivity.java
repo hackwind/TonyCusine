@@ -3,6 +3,7 @@ package com.tonyhu.cookbook.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -84,6 +85,23 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
     private void startActivity(Class cls) {
         Intent intent = new Intent(this,cls);
         startActivity(intent);
+    }
+
+    public void openDrawer(){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 //    private String getTip(int hour) {

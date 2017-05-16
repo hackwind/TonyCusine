@@ -12,7 +12,7 @@
 
     <string name="tab_title_cuisine">菜系</string>
     <string name="tab_title_foodtype">分类</string>
-    <string name="tab_title_nutrition">健康</string>
+    <string name="tab_title_my">我的</string>
 
     <string name="detail_material">食材:</string>
     <string name="detail_steps">步骤:</string>
@@ -31,7 +31,7 @@
     <string name="reward">赏</string>
     <string name="reward_tip">打赏一下胡爸</string>
     <string name="thanks">感谢</string>
-    <string name="thanks_content">胡爸菜谱是由胡爸利用业余时间精心整理和开发的，当初开发这个app是为了能为我的家庭提供一份"口袋式"菜谱，方便自己家庭的同时，胡爸也希望能方便更多的人。本菜谱的资源均收集来自网络，如果有侵犯到您的权利，可以反馈给我，我将重新整理。胡爸只是挑选最有代表性的做法，还有很多做法因各种原因，没有一一收纳进来。开发期间非常感谢我的爸爸妈妈和老婆，是他们耐心地在照顾的两个小宝宝，胡爸才能安心地投入这个app的开发。当然也感谢我的两个小宝宝，没有过多地过来捣乱,最后非常感谢您的使用。</string>
+    <string name="thanks_content">非常感谢您使用《胡爸菜谱》app,《胡爸菜谱》是由胡爸利用业余时间精心整理和开发的，开发这个app是为了能做成一份"口袋式"的菜谱，方便自己家庭和其他更多的家庭。本菜谱的资源均收集来自网络，如果有侵犯到您的权利，可以反馈给我，我将重新整理。胡爸只是挑选有代表性的做法，还有很多做法因各种原因，没有一一收纳进来。开发期间非常感谢我的爸爸妈妈和老婆，是他们耐心地在照顾的两个小宝宝，胡爸才能安心地投入这个app的开发。当然也感谢我的两个小宝宝，没有过多地过来捣乱。</string>
     <string name="scan">扫一扫下面的二维码关注公众号</string>
     <string name="search_gongzhonghao">或者微信搜索公众号:"胡爸菜谱"，即可在公众号里留言了</string>
     <string name="only_one_phone"><u>只有一个手机，无法扫描，怎么办？</u></string>

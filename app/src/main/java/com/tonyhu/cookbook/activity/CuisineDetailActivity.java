@@ -1,6 +1,7 @@
 package com.tonyhu.cookbook.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -281,7 +282,7 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
             image = (ImageView)itemView.findViewById(R.id.step_image);
         }
 
-        public void bind(int position) {
+        public void bind(final int position) {
            step.setText((position + 1) + "." + steps[position]);
             if(step_images != null && !TextUtils.isEmpty(step_images[position]) && !"null".equals(step_images[position])) {
                 Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
@@ -294,7 +295,17 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
             } else {
                 image.setVisibility(View.GONE);
             }
-
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(CuisineDetailActivity.this,PhotoViewActivity.class);
+                    intent.putExtra("cuisine",cusineName);
+                    intent.putExtra("currentPosition",position);
+                    intent.putExtra("urls",step_images);
+                    intent.putExtra("descs",steps);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
