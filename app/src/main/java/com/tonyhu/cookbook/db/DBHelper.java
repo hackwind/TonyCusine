@@ -1,7 +1,10 @@
 package com.tonyhu.cookbook.db;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.dao.Dao;
@@ -14,7 +17,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/5.
@@ -22,7 +27,7 @@ import java.util.HashMap;
 
 public class DBHelper  {
     private static  String DATABASE_NAME = "lovefood";
-
+    private static int DATABASE_VERSION = 1;
 
     private static DBHelper mInstance;
     private HashMap<String,Dao> daos = new HashMap<>();
@@ -30,6 +35,7 @@ public class DBHelper  {
     private String DB_PATH;
 
     public DBHelper(Context context) {
+        List<String> favorites = new ArrayList<>();
         if (android.os.Build.VERSION.SDK_INT >= 4.2) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         } else {
@@ -46,9 +52,44 @@ public class DBHelper  {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getPath(), null,
+                    SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READWRITE);
+
+            if(db.getVersion() < DATABASE_VERSION) {//数据库升级
+                try {
+                    Cursor cursor = db.query("cuisine",new String[]{"name"},"is_favorite=?",new String[]{"1"},null,null,null);
+                    String name = null;
+                    while(cursor.moveToNext()) {
+                        name = cursor.getString(0);
+                        favorites.add(name);
+                    }
+                    cursor.close();
+                } catch (Exception e) {e.printStackTrace();}
+                try {
+                    db.close();
+                    file.deleteOnExit();
+                    copyFile(context, file, R.raw.lovefood);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getPath(), null,
                 SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READWRITE);
+        db.setVersion(DATABASE_VERSION);
+        if(favorites.size() > 0) {
+            try {
+                ContentValues values = new ContentValues();
+                values.put("is_favorite","1");
+                db.beginTransaction();
+                for(String name : favorites) {
+                    db.update("cuisine", values, "name=?", new String[]{name});
+                }
+                db.setTransactionSuccessful();
+                db.endTransaction();
+            } catch (Exception e){e.printStackTrace();}
+        }
         connectionSource = new AndroidConnectionSource(db);
     }
 

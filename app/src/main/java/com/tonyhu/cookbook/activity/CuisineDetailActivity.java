@@ -160,8 +160,25 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         });
 
         rootView = (TonyScrollView)findViewById(R.id.rootview);
-        rootView.scrollTo(0,0);
+        rootView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+             rootView.scrollTo(0,0);
+            }
+        },100);
         rootView.setOnScrollListener(this);
+
+        bannerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CuisineDetailActivity.this,PhotoViewActivity.class);
+                intent.putExtra("cuisine",cusineName);
+                intent.putExtra("currentPosition",0);
+                intent.putExtra("urls",step_images);
+                intent.putExtra("descs",steps);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateFavorStatus(int status) {
