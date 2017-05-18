@@ -4,8 +4,12 @@ package com.tonyhu.cookbook.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.widget.TextView;
 
 import com.blunderer.materialdesignlibrary.handlers.ViewPagerHandler;
 import com.tonyhu.cookbook.R;
@@ -16,6 +20,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class WelcomeActivity extends BaseActivity {
+    private final static int DURATION = 2000;
+    private Handler handler;
+    private TextView text1;
+    private TextView text2;
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -27,17 +35,34 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void startTimer() {
+        AlphaAnimation aa = new AlphaAnimation(0.0f,1.0f);
+        aa.setDuration(DURATION);
+        findViewById(R.id.text1).startAnimation(aa);
+        findViewById(R.id.text2).startAnimation(aa);
+
+        handler = new Handler();
         try {
-            new Timer().schedule(new TimerTask() {
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    findViewById(R.id.text1).setVisibility(View.GONE);
+                    findViewById(R.id.text2).setVisibility(View.GONE);
+                    exitFullScreen();
                   Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
                   startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                     finish();
                 }
-            },2000);
+            },DURATION);
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void exitFullScreen() {
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setAttributes(params);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }

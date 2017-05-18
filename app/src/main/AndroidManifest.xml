@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.tonyhu.cookbook.activity.WelcomeActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/FirstActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
