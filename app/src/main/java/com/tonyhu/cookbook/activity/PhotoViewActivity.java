@@ -91,6 +91,8 @@ public class PhotoViewActivity extends BaseActivity  {
             Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, url);
             if(bitmap != null) {
                 photoView.setImageBitmap(bitmap);
+            } else {
+                photoView.setImageResource(R.drawable.default_no_pic);
             }
             container.addView(photoView);
             photoView.setOnClickListener(new View.OnClickListener() {
