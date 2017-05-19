@@ -45,9 +45,6 @@ public class WelcomeActivity extends BaseActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    findViewById(R.id.text1).setVisibility(View.GONE);
-                    findViewById(R.id.text2).setVisibility(View.GONE);
-                    exitFullScreen();
                   Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
                   startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -59,10 +56,4 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    private void exitFullScreen() {
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().setAttributes(params);
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-    }
 }
