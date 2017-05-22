@@ -22,8 +22,6 @@ import java.util.TimerTask;
 public class WelcomeActivity extends BaseActivity {
     private final static int DURATION = 2000;
     private Handler handler;
-    private TextView text1;
-    private TextView text2;
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -45,8 +43,8 @@ public class WelcomeActivity extends BaseActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                  Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
-                  startActivity(intent);
+                    Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
+                    startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                     finish();
                 }

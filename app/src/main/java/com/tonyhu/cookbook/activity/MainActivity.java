@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerBottomHandler;
 import com.blunderer.materialdesignlibrary.handlers.NavigationDrawerTopHandler;
@@ -20,11 +21,13 @@ import com.tonyhu.cookbook.R;
 
 
 public class MainActivity extends com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity {
+    private long lastOnBackPressed = 0;
+    private int backPressCount = 0;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initStatusBar(R.color.color_primary);
-        //调用360检查更新sdk，后面的颜色是状态栏颜色
+        //调用360检查更新sdk，后面的颜色是升级对话框状态栏颜色
         UpdateHelper.getInstance().init(getApplicationContext(), Color.parseColor("#0A93DB"));
     }
 
@@ -106,6 +109,17 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            if(backPressCount == 0) {
+                backPressCount ++;
+                lastOnBackPressed = System.currentTimeMillis();
+                Toast.makeText(this,R.string.press_back_again,Toast.LENGTH_SHORT).show();
+                return;
+            } else if(System.currentTimeMillis() - lastOnBackPressed > 3000) {
+                lastOnBackPressed = System.currentTimeMillis();
+                backPressCount = 0;
+                Toast.makeText(this,R.string.press_back_again,Toast.LENGTH_LONG).show();
+                return;
+            }
             super.onBackPressed();
         }
     }
