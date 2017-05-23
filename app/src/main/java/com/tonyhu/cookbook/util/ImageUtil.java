@@ -63,7 +63,7 @@ public class ImageUtil {
         try
         {
             InputStream is = am.open("菜谱_new/" + level  + "/"  + fileName);
-            byte[] buffer = new byte[512000];//足够大
+            byte[] buffer = new byte[1024000];//足够大
             int len = is.read(buffer);
             for(int i = 0; i < len; i += 5000){//与加密相同
                 byte temp = buffer[i];
@@ -87,7 +87,7 @@ public class ImageUtil {
         try
         {
             InputStream is = am.open("分类_new/" + cuisineName + "/"  + picName);
-            byte[] buffer = new byte[512000];//足够大
+            byte[] buffer = new byte[1024000];//足够大
             int len = is.read(buffer);
             for(int i = 0; i < len; i += 5000){//与加密相同
                 byte temp = buffer[i];

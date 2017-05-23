@@ -23,11 +23,13 @@ public class FileUtil {
         try {
             InputStream in = new FileInputStream(src);
             OutputStream out = new FileOutputStream(dest);
-            while (in.read(tempbytes) != -1) {//简单的交换
+            int len = in.read(tempbytes);
+            while (len != -1) {//简单的交换
                 byte a = tempbytes[0];
                 tempbytes[0] = tempbytes[1];
                 tempbytes[1] = a;
-                out.write(tempbytes);//写文件
+                out.write(tempbytes,0,len);//写文件
+                len = in.read(tempbytes);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,7 +46,13 @@ public class FileUtil {
             throw new Exception("path:'" + path + "' does not exist,r u kidding.");
         }
         File[] subFiles = directory.listFiles();
-
+        //删除旧目录
+        for(File file: subFiles) {
+            if(file.getName().contains("_new")) {
+                deleteDir(file);
+            }
+        }
+        subFiles = directory.listFiles();
         //建目标目录
         for(File file: subFiles) {
             File newFile =  new File(file.getAbsolutePath() + "_new");
@@ -68,5 +76,20 @@ public class FileUtil {
         } else {
             encrypt(src,dest);
         }
+    }
+
+    private static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            //递归删除目录中的子目录下
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        // 目录此时为空，可以删除
+        return dir.delete();
     }
 }
