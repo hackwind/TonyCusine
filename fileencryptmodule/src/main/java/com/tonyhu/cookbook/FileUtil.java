@@ -1,4 +1,4 @@
-package com.tonyhu.cookbook.util;
+package com.tonyhu.cookbook;
 
 import java.io.File;
 import java.io.FileInputStream;
