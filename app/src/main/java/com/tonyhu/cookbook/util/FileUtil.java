@@ -1,4 +1,4 @@
-package com.tonyhu.cookbook.util;
+﻿package com.tonyhu.cookbook.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,11 +39,13 @@ public class FileUtil {
 
 
 
-    public static void main(String[] args) throws Exception{
-        String path = "E:\\Project\\workspace\\LoveFood\\app\\src\\main\\assets";
+    public static void main(String[] args) {
+//        String path = "E:\\Project\\workspace\\LoveFood\\app\\src\\main\\assets";
+        String path = "F:\\workspace\\LoveFood\\app\\src\\main\\assets";
         File directory = new File(path);
         if(!directory.exists()) {
-            throw new Exception("path:'" + path + "' does not exist,r u kidding.");
+            System.out.println("path:'" + path + "' does not exist,r u kidding.");
+	    return;
         }
         File[] subFiles = directory.listFiles();
         //删除旧目录
