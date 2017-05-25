@@ -36,4 +36,6 @@ dependencies {
     compile project(':swipebacklayout')
     compile files('libs/360update-7.0.3.jar')
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile files('libs/umeng-analytics-v6.1.0.jar')
+    compile files('libs/utdid4all-1.0.4.jar')
 }

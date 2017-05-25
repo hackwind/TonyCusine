@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.tonyhu.cookbook.util.SystemStatusManager;
+import com.umeng.analytics.MobclickAgent;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -42,5 +43,13 @@ public class BaseActivity extends SwipeBackActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarAlpha(0.5f);
         }
+    }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

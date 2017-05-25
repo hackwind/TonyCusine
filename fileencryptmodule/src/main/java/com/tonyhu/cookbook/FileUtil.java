@@ -59,6 +59,7 @@ public class FileUtil {
             newFile.mkdirs();
             copyFolder(file,newFile);
         }
+        System.out.println("Job done.");
     }
 
     private static void copyFolder(File src, File dest) throws IOException {
