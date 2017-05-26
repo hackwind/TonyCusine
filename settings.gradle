@@ -1,1 +1,1 @@
-include ':app', ':materiallibrary', ':pageslidinglibrary', ':viewpagerindicator', ':selectableroundedimageview', ':swipebacklayout'
+include ':app', ':materiallibrary', ':pageslidinglibrary', ':viewpagerindicator', ':selectableroundedimageview', ':swipebacklayout', ':fileencryptmodule'

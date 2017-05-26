@@ -50,7 +50,7 @@ public class CategoryDao {
 
     public List<Category> listByCategory(int category) {
         try {
-            return  dao.queryBuilder().where().eq("category",category).query();
+            return  dao.queryBuilder().orderBy("category",true).where().eq("category",category).query();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -58,7 +58,7 @@ public class CategoryDao {
     }
     public List<Category> listByParentCategory(int category) {
         try {
-            return  dao.queryBuilder().where().eq("parent_category",category).query();
+            return  dao.queryBuilder().orderBy("category",true).where().eq("parent_category",category).query();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

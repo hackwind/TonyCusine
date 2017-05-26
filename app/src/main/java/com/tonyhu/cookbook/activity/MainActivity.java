@@ -18,6 +18,7 @@ import com.blunderer.materialdesignlibrary.handlers.NavigationMainContentHandler
 import com.qihoo.appstore.common.updatesdk.lib.UpdateHelper;
 import com.tonyhu.cookbook.fragment.MainFragment;
 import com.tonyhu.cookbook.R;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class MainActivity extends com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity {
@@ -149,6 +150,15 @@ public class MainActivity extends com.blunderer.materialdesignlibrary.activities
         }
     }
 
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 //    private String getTip(int hour) {
 //        if(hour > 20) {
 //            return "主人，晚上好";
