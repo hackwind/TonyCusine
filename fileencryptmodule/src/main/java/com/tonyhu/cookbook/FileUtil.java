@@ -40,7 +40,8 @@ public class FileUtil {
 
 
     public static void main(String[] args) throws Exception{
-        String path = "E:\\Project\\workspace\\LoveFood\\app\\src\\main\\assets";
+//        String path = "E:\\Project\\workspace\\LoveFood\\app\\src\\main\\assets";
+        String path = "F:\\workspace\\LoveFood\\app\\src\\main\\assets";
         File directory = new File(path);
         if(!directory.exists()) {
             throw new Exception("path:'" + path + "' does not exist,r u kidding.");

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LoveFood.iml" filepath="$PROJECT_DIR$/LoveFood.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fileencryptmodule/fileencryptmodule.iml" filepath="$PROJECT_DIR$/fileencryptmodule/fileencryptmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fileencryptmodule/fileencryptmodule.iml" filepath="$PROJECT_DIR$/fileencryptmodule/fileencryptmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/materiallibrary/materiallibrary.iml" filepath="$PROJECT_DIR$/materiallibrary/materiallibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/pageslidinglibrary/pageslidinglibrary.iml" filepath="$PROJECT_DIR$/pageslidinglibrary/pageslidinglibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/selectableroundedimageview/selectableroundedimageview.iml" filepath="$PROJECT_DIR$/selectableroundedimageview/selectableroundedimageview.iml" />
