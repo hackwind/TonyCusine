@@ -5,7 +5,8 @@
     <com.tonyhu.cookbook.widget.TonyScrollView
         android:id="@+id/rootview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -116,5 +117,12 @@
             android:textColor="@android:color/transparent"
             android:textSize="20sp"
             android:layout_marginBottom="2dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bannerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
     </LinearLayout>
 </FrameLayout>

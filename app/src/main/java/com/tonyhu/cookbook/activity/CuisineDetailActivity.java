@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.db.Cuisine;
 import com.tonyhu.cookbook.db.CuisineDao;
@@ -24,6 +27,7 @@ import com.tonyhu.cookbook.db.Ingredients;
 import com.tonyhu.cookbook.db.IngredientsDao;
 import com.tonyhu.cookbook.db.Step;
 import com.tonyhu.cookbook.db.StepDao;
+import com.tonyhu.cookbook.util.Constants;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 import com.tonyhu.cookbook.widget.TonyScrollView;
@@ -46,6 +50,7 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
     private TextView addFavoriteAnim;
     private LinearLayout toolbar;
     private TextView title;
+    private LinearLayout adView;
 
     private String[] materialsNames;
     private String[] materialsValues;
@@ -71,6 +76,7 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         cusineName = getIntent().getStringExtra("cuisine_name");
         initView();
         getData();
+        loadAd();
     }
 
     private void initView() {
@@ -82,6 +88,7 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         rySteps = (RecyclerView)findViewById(R.id.detail_recycleview_steps);
         addFavorite = (ImageView)findViewById(R.id.detail_addFavorite);
         addFavoriteAnim = (TextView)findViewById(R.id.addfav_anim);
+        adView = (LinearLayout)findViewById(R.id.bannerview);
 
         GridLayoutManager matLayoutManager = new GridLayoutManager(this, 2){
             @Override
@@ -270,6 +277,37 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         oldColor = Color.parseColor("#".concat(hex).concat("ffffff"));
         title.setTextColor(oldColor);
     }
+
+    private void loadAd() {
+        BannerView bv = new BannerView(this, ADSize.BANNER,
+                Constants.GDT_APPID, Constants.GDT_APP_KEY);
+        bv.setRefresh(20);// 广告轮播时间 按钮默认关闭
+        bv.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                // 广告加载失败
+                adView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onADReceiv() {
+                // 加载广告成功时
+                adView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onADClicked() {
+                // 广告点击时
+                super.onADClicked();
+            }
+        });
+        adView.addView(bv);
+        adView.setVisibility(View.GONE);
+        bv.loadAD();
+
+    }
+
 
     class MaterialHolder extends RecyclerView.ViewHolder {
         TextView name;

@@ -9,9 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.tonyhu.cookbook.R;
+import com.tonyhu.cookbook.util.Constants;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.widget.PhotoViewPager;
 
@@ -25,6 +30,7 @@ public class PhotoViewActivity extends BaseActivity  {
 
     public static final String TAG = PhotoViewActivity.class.getSimpleName();
     private PhotoViewPager mViewPager;
+    private LinearLayout adView;
     private int currentPosition;
     private MyImageAdapter adapter;
     private TextView mTvImageCount;
@@ -40,12 +46,14 @@ public class PhotoViewActivity extends BaseActivity  {
         setContentView(R.layout.activity_photo_view);
         initView();
         initData();
+        loadAd();
     }
 
     private void initView() {
         mViewPager = (PhotoViewPager) findViewById(R.id.view_pager_photo);
         mTvImageCount = (TextView) findViewById(R.id.tv_image_count);
         mTvDesc = (TextView) findViewById(R.id.tv_desc);
+        adView = (LinearLayout)findViewById(R.id.bannerview);
     }
 
     private void initData() {
@@ -123,5 +131,32 @@ public class PhotoViewActivity extends BaseActivity  {
         public int getItemPosition(Object object) {
             return POSITION_NONE;
         }
+    }
+
+    private void loadAd() {
+        BannerView bv = new BannerView(this, ADSize.BANNER,
+                Constants.GDT_APPID, Constants.GDT_APP_KEY);
+        bv.setRefresh(20);// 广告轮播时间 按钮默认关闭
+        bv.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                // 广告加载失败
+            }
+
+            @Override
+            public void onADReceiv() {
+                // 加载广告成功时
+            }
+
+            @Override
+            public void onADClicked() {
+                // 广告点击时
+                super.onADClicked();
+            }
+        });
+        adView.addView(bv);
+        bv.loadAD();
+
     }
 }
