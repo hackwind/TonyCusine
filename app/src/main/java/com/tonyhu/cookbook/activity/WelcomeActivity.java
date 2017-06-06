@@ -66,7 +66,7 @@ public class WelcomeActivity extends BaseActivity {
         //参数 this, container, Constants.APPId, Constants.SplashPosId
         //创建开屏广告，广告拉取成功后会自动展示在container中。Container会首先被清空||测试1101152570  8863364436303842593
         //注意 Constants.APPId和Constants.SplashPosId后期要替换成自己的
-        new SplashAD(WelcomeActivity.this, adContainer, Constants.GDT_APPID, Constants.GDT_APP_KEY,
+        new SplashAD(WelcomeActivity.this, adContainer, Constants.GDT_APPID, Constants.GDT_SPLASH_POS_ID,
                 new SplashADListener() {
 
 

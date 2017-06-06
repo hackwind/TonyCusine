@@ -135,7 +135,7 @@ public class PhotoViewActivity extends BaseActivity  {
 
     private void loadAd() {
         BannerView bv = new BannerView(this, ADSize.BANNER,
-                Constants.GDT_APPID, Constants.GDT_APP_KEY);
+                Constants.GDT_APPID, Constants.GDT_PAGE_PHOTO_REVIEW_POS_ID);
         bv.setRefresh(20);// 广告轮播时间 按钮默认关闭
         bv.setADListener(new AbstractBannerADListener() {
 
