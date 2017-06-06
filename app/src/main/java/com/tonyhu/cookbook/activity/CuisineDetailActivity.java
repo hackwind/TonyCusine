@@ -281,7 +281,7 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
     private void loadAd() {
         BannerView bv = new BannerView(this, ADSize.BANNER,
                 Constants.GDT_APPID, Constants.GDT_PAGE_DETAIL_POS_ID);
-        bv.setRefresh(20);// 广告轮播时间 按钮默认关闭
+        bv.setRefresh(30);// 广告轮播时间 按钮默认关闭
         bv.setADListener(new AbstractBannerADListener() {
 
             @Override
