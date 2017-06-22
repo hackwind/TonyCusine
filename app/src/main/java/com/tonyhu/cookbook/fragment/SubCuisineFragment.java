@@ -149,9 +149,14 @@ public class SubCuisineFragment extends Fragment {
                 // set default image
                 subImage.setImageResource(R.drawable.default_image);
             } else {
-                Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName() , cover);
-                if(bitmap != null) {
-                    subImage.setImageBitmap(bitmap);
+                try {
+                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName(), cover);
+                    if (bitmap != null) {
+                        subImage.setImageBitmap(bitmap);
+                    }
+                }catch(OutOfMemoryError o) {
+                    o.printStackTrace();
+                    System.gc();
                 }
             }
             subTitle.setText(cuisine.getName());

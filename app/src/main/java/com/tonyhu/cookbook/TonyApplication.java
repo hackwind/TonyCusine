@@ -16,6 +16,7 @@ public class TonyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this.getApplicationContext();
+        CrashHandler.getInstance().init();
     }
 
     public static Context getContext() {

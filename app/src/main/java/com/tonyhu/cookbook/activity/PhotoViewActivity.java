@@ -97,10 +97,15 @@ public class PhotoViewActivity extends BaseActivity  {
             PhotoView photoView = new PhotoView(activity);
 
             Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, url);
-            if(bitmap != null) {
-                photoView.setImageBitmap(bitmap);
-            } else {
-                photoView.setImageResource(R.drawable.default_no_pic);
+            try {
+                if (bitmap != null) {
+                    photoView.setImageBitmap(bitmap);
+                } else {
+                    photoView.setImageResource(R.drawable.default_no_pic);
+                }
+            } catch(OutOfMemoryError o) {
+                o.printStackTrace();
+                System.gc();
             }
             container.addView(photoView);
             photoView.setOnClickListener(new View.OnClickListener() {

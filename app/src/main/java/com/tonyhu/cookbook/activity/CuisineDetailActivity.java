@@ -214,15 +214,20 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         }
         String bannerIUrl = cuisine.getBannerImage();
         if(!TextUtils.isEmpty(bannerIUrl)) {
-            Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName,bannerIUrl);
-            if(bitmap != null) {
-                bannerView.setImageBitmap(bitmap);
-                int width = ScreenUtil.getScreenWidth();
-                int height =  width * 225 / 300;
-                ViewGroup.LayoutParams params = bannerView.getLayoutParams();
-                params.width = width;
-                params.height = height;
-                bannerView.setLayoutParams(params);
+            try {
+                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, bannerIUrl);
+                if (bitmap != null) {
+                    bannerView.setImageBitmap(bitmap);
+                    int width = ScreenUtil.getScreenWidth();
+                    int height = width * 225 / 300;
+                    ViewGroup.LayoutParams params = bannerView.getLayoutParams();
+                    params.width = width;
+                    params.height = height;
+                    bannerView.setLayoutParams(params);
+                }
+            } catch(OutOfMemoryError e) {
+                e.printStackTrace();
+                System.gc();
             }
         }
         cuisineName.setText(cuisine.getName());
@@ -340,12 +345,17 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         public void bind(final int position) {
            step.setText((position + 1) + "." + steps[position]);
             if(step_images != null && !TextUtils.isEmpty(step_images[position]) && !"null".equals(step_images[position])) {
-                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
-                if(bitmap != null) {
-                    image.setImageBitmap(bitmap);
-                    image.setVisibility(View.VISIBLE);
-                } else {
-                    image.setVisibility(View.GONE);
+                try{
+                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
+                    if(bitmap != null) {
+                        image.setImageBitmap(bitmap);
+                        image.setVisibility(View.VISIBLE);
+                    } else {
+                        image.setVisibility(View.GONE);
+                    }
+                } catch(OutOfMemoryError e) {
+                    e.printStackTrace();
+                    System.gc();
                 }
             } else {
                 image.setVisibility(View.GONE);

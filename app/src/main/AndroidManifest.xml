@@ -91,7 +91,7 @@
 
         <!-- UMeng SDK -->
         <meta-data android:value="59262e04c62dca73200015b7" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="qq" android:name="UMENG_CHANNEL"/>
+        <meta-data android:value="xiaomi" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

@@ -76,6 +76,8 @@ public class ImageUtil {
         catch (IOException e)
         {
             e.printStackTrace();
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
         }
         return image;
     }
@@ -99,6 +101,8 @@ public class ImageUtil {
         }
         catch (IOException e)
         {
+            e.printStackTrace();
+        } catch (OutOfMemoryError e) {
             e.printStackTrace();
         }
         return image;
