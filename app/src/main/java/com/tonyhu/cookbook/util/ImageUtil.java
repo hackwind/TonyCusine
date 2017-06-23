@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.tonyhu.cookbook.TonyApplication;
 
@@ -52,17 +53,17 @@ public class ImageUtil {
 
     /**
      * 对文件进行解密
-     * @param level
+     * @param name
      * @param fileName
      * @return
      */
-    public static Bitmap getAssetsBitmap(String level,String fileName)
+    public static Bitmap getAssetsBitmap(String name,String fileName)
     {
         Bitmap image = null;
         AssetManager am = TonyApplication.getContext().getResources().getAssets();
         try
         {
-            InputStream is = am.open("菜谱_new/" + level  + "/"  + fileName);
+            InputStream is = am.open("菜谱_new/" + name  + "/"  + fileName);
             byte[] buffer = new byte[1024000];//足够大
             int len = is.read(buffer);
             for(int i = 0; i < len; i += 5000){//与加密相同
@@ -70,10 +71,11 @@ public class ImageUtil {
                 buffer[i] = buffer[i+1];
                 buffer[i+1] = temp;
             }
+//            Log.d("hjs","name:" + name + ",fileName:" + fileName + ",file len:" + len);
             image = BitmapFactory.decodeByteArray(buffer, 0, len);
             is.close();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         } catch (OutOfMemoryError e) {
@@ -82,13 +84,13 @@ public class ImageUtil {
         return image;
     }
 
-    public static Bitmap getAssetsCategoryBitmap(String type,String cuisineName,String picName)
+    public static Bitmap getAssetsCategoryBitmap(String type)
     {
         Bitmap image = null;
         AssetManager am = TonyApplication.getContext().getResources().getAssets();
         try
         {
-            InputStream is = am.open("分类_new/" + cuisineName + "/"  + picName);
+            InputStream is = am.open("分类_new/一级/"  + type);
             byte[] buffer = new byte[1024000];//足够大
             int len = is.read(buffer);
             for(int i = 0; i < len; i += 5000){//与加密相同

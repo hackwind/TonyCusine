@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,9 +22,11 @@ import com.tonyhu.cookbook.R;
 import com.tonyhu.cookbook.activity.CuisineDetailActivity;
 import com.tonyhu.cookbook.db.Cuisine;
 import com.tonyhu.cookbook.db.CuisineDao;
+import com.tonyhu.cookbook.util.AsyncImageLoader;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class SubCuisineFragment extends Fragment {
@@ -121,16 +124,12 @@ public class SubCuisineFragment extends Fragment {
         if(cuisineItems == null) {
             return;
         }
-        //For test
-//        cuisineItems.addAll(cuisineItems);
-//        cuisineItems.addAll(cuisineItems);
-//        cuisineItems.addAll(cuisineItems);
-//        cuisineItems.addAll(cuisineItems);
 
         if(adapter != null) {
             adapter.notifyDataSetChanged();
         }
     }
+
 
     class Holder extends RecyclerView.ViewHolder {
         ImageView subImage;
@@ -149,15 +148,16 @@ public class SubCuisineFragment extends Fragment {
                 // set default image
                 subImage.setImageResource(R.drawable.default_image);
             } else {
-                try {
-                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName(), cover);
-                    if (bitmap != null) {
-                        subImage.setImageBitmap(bitmap);
-                    }
-                }catch(OutOfMemoryError o) {
-                    o.printStackTrace();
-                    System.gc();
-                }
+//                try {
+//                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cuisine.getName(), cover);
+//                    if (bitmap != null) {
+//                        subImage.setImageBitmap(bitmap);
+//                    }
+//                }catch(OutOfMemoryError o) {
+//                    o.printStackTrace();
+//                    System.gc();
+//                }
+                AsyncImageLoader.getInstance().loadBitmaps("1",subImage,cuisine.getName(),cover);
             }
             subTitle.setText(cuisine.getName());
             itemView.setOnClickListener(new View.OnClickListener() {

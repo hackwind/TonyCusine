@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,11 +28,13 @@ import com.tonyhu.cookbook.db.Ingredients;
 import com.tonyhu.cookbook.db.IngredientsDao;
 import com.tonyhu.cookbook.db.Step;
 import com.tonyhu.cookbook.db.StepDao;
+import com.tonyhu.cookbook.util.AsyncImageLoader;
 import com.tonyhu.cookbook.util.Constants;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 import com.tonyhu.cookbook.widget.TonyScrollView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 
@@ -214,21 +217,23 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         }
         String bannerIUrl = cuisine.getBannerImage();
         if(!TextUtils.isEmpty(bannerIUrl)) {
-            try {
-                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, bannerIUrl);
-                if (bitmap != null) {
-                    bannerView.setImageBitmap(bitmap);
-                    int width = ScreenUtil.getScreenWidth();
-                    int height = width * 225 / 300;
-                    ViewGroup.LayoutParams params = bannerView.getLayoutParams();
-                    params.width = width;
-                    params.height = height;
-                    bannerView.setLayoutParams(params);
-                }
-            } catch(OutOfMemoryError e) {
-                e.printStackTrace();
-                System.gc();
-            }
+//            try {
+//                Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, bannerIUrl);
+//                if (bitmap != null) {
+//                    bannerView.setImageBitmap(bitmap);
+//                    int width = ScreenUtil.getScreenWidth();
+//                    int height = width * 225 / 300;
+//                    ViewGroup.LayoutParams params = bannerView.getLayoutParams();
+//                    params.width = width;
+//                    params.height = height;
+//                    bannerView.setLayoutParams(params);
+//                }
+
+//            } catch(OutOfMemoryError e) {
+//                e.printStackTrace();
+//                System.gc();
+//            }
+            AsyncImageLoader.getInstance().loadBitmaps("1",bannerView,cusineName,bannerIUrl);
         }
         cuisineName.setText(cuisine.getName());
         title.setText(cuisine.getName());
@@ -345,18 +350,19 @@ public class CuisineDetailActivity extends BaseActivity implements TonyScrollVie
         public void bind(final int position) {
            step.setText((position + 1) + "." + steps[position]);
             if(step_images != null && !TextUtils.isEmpty(step_images[position]) && !"null".equals(step_images[position])) {
-                try{
-                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
-                    if(bitmap != null) {
-                        image.setImageBitmap(bitmap);
-                        image.setVisibility(View.VISIBLE);
-                    } else {
-                        image.setVisibility(View.GONE);
-                    }
-                } catch(OutOfMemoryError e) {
-                    e.printStackTrace();
-                    System.gc();
-                }
+//                try{
+//                    Bitmap bitmap = ImageUtil.getAssetsBitmap(cusineName, step_images[position]);
+//                    if(bitmap != null) {
+//                        image.setImageBitmap(bitmap);
+//                        image.setVisibility(View.VISIBLE);
+//                    } else {
+//                        image.setVisibility(View.GONE);
+//                    }
+//                } catch(OutOfMemoryError e) {
+//                    e.printStackTrace();
+//                    System.gc();
+//                }
+                AsyncImageLoader.getInstance().loadBitmaps("1",image,cusineName,step_images[position]);
             } else {
                 image.setVisibility(View.GONE);
             }

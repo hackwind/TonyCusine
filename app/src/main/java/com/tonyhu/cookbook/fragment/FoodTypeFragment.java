@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,9 +25,11 @@ import com.tonyhu.cookbook.db.Category;
 import com.tonyhu.cookbook.db.CategoryDao;
 import com.tonyhu.cookbook.db.Cuisine;
 import com.tonyhu.cookbook.db.CuisineDao;
+import com.tonyhu.cookbook.util.AsyncImageLoader;
 import com.tonyhu.cookbook.util.ImageUtil;
 import com.tonyhu.cookbook.util.ScreenUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class FoodTypeFragment extends Fragment {
@@ -153,15 +156,17 @@ public class FoodTypeFragment extends Fragment {
                 // set default image
                 subImage.setImageResource(R.drawable.default_image);
             } else {
-                try {
-                    Bitmap bitmap = ImageUtil.getAssetsCategoryBitmap(name ,"一级" , cover);
-                    if(bitmap != null) {
-                        subImage.setImageBitmap(bitmap);
-                    }
-                }catch(OutOfMemoryError o) {
-                    o.printStackTrace();
-                    System.gc();
-                }
+//                try {
+//                    Bitmap bitmap = ImageUtil.getAssetsCategoryBitmap(name ,"一级" , cover);
+//                    if(bitmap != null) {
+//                        subImage.setImageBitmap(bitmap);
+//                    }
+//                }catch(OutOfMemoryError o) {
+//                    o.printStackTrace();
+//                    System.gc();
+//                }
+
+                AsyncImageLoader.getInstance().loadBitmaps("2",subImage,name,cover);
             }
             subTitle.setText(category.getName());
             itemView.setOnClickListener(new View.OnClickListener() {
