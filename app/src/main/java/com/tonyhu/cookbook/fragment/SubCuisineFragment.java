@@ -30,18 +30,18 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class SubCuisineFragment extends Fragment {
-    private final static String TYPE = "type";
-    private final static String NAME = "name";
-    private final static int PADDING_OUTSIDE = 20;
-    private final static int PADDING_INSIDE = 10;
-    private View rootView;
-    private RecyclerView.Adapter adapter;
-    private List<Cuisine> cuisineItems;
-    private int type;
-    private String name;
+        private final static String TYPE = "type";
+        private final static String NAME = "name";
+        private final static int PADDING_OUTSIDE = ScreenUtil.dip2px(6);
+        private final static int PADDING_INSIDE = ScreenUtil.dip2px(3);
+        private View rootView;
+        private RecyclerView.Adapter adapter;
+        private List<Cuisine> cuisineItems;
+        private int type;
+        private String name;
 
-    public SubCuisineFragment() {
-    }
+        public SubCuisineFragment() {
+        }
 
     public static SubCuisineFragment newInstance(int typeId,String name) {
         SubCuisineFragment fragment = new SubCuisineFragment();
@@ -89,19 +89,19 @@ public class SubCuisineFragment extends Fragment {
                 holder.bind(position);
 
                 int screenWidth = ScreenUtil.getScreenWidth();
-                int width = (screenWidth - PADDING_INSIDE *2 - PADDING_OUTSIDE * 2) / 2;
+                int width = (screenWidth - PADDING_INSIDE * 2 - PADDING_OUTSIDE * 2) / 2;
                 int height = width + (int)getResources().getDimension(R.dimen.cardview_title_height);
 
                 CardView.LayoutParams params = new CardView.LayoutParams(width,height);
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 params.bottomMargin = PADDING_OUTSIDE;
                 params.topMargin = PADDING_OUTSIDE;
-                if(position%2 == 0) {
+                if(position % 2 == 0) {
                     params.leftMargin = PADDING_OUTSIDE;
                     params.rightMargin = PADDING_INSIDE;
                 } else {
                     params.leftMargin = PADDING_INSIDE;
-                    params.rightMargin = PADDING_OUTSIDE;
+                    params.rightMargin = 0;
                 }
                 holder.itemView.setLayoutParams(params);
                 ImageView img = (ImageView)holder.itemView.findViewById(R.id.sub_image);

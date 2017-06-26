@@ -30,8 +30,8 @@ import java.util.List;
  */
 
 public class MyFavoriteActivity extends BaseActivity {
-    private final static int PADDING_OUTSIDE = 20;
-    private final static int PADDING_INSIDE = 10;
+    private final static int PADDING_OUTSIDE = ScreenUtil.dip2px(6);
+    private final static int PADDING_INSIDE = ScreenUtil.dip2px(3);
     private RecyclerView.Adapter adapter;
     private List<Cuisine> cuisineItems;
 
@@ -78,12 +78,12 @@ public class MyFavoriteActivity extends BaseActivity {
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 params.bottomMargin = PADDING_OUTSIDE;
                 params.topMargin = PADDING_OUTSIDE;
-                if(position%2 == 0) {
+                if(position % 2 == 0) {
                     params.leftMargin = PADDING_OUTSIDE;
                     params.rightMargin = PADDING_INSIDE;
                 } else {
                     params.leftMargin = PADDING_INSIDE;
-                    params.rightMargin = PADDING_OUTSIDE;
+                    params.rightMargin = 0;
                 }
                 holder.itemView.setLayoutParams(params);
                 ImageView img = (ImageView)holder.itemView.findViewById(R.id.sub_image);

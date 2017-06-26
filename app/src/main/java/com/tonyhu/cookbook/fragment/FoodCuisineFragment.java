@@ -30,8 +30,8 @@ import com.tonyhu.cookbook.util.ScreenUtil;
 import java.util.List;
 
 public class FoodCuisineFragment extends Fragment {
-    private final static int PADDING_OUTSIDE = 20;
-    private final static int PADDING_INSIDE = 10;
+    private final static int PADDING_OUTSIDE = ScreenUtil.dip2px(6);
+    private final static int PADDING_INSIDE = ScreenUtil.dip2px(3);
     private View rootView;
     private RecyclerView.Adapter adapter;
     private List<Cuisine> cuisineItems;
@@ -97,7 +97,7 @@ public class FoodCuisineFragment extends Fragment {
                     params.rightMargin = PADDING_INSIDE;
                 } else {
                     params.leftMargin = PADDING_INSIDE;
-                    params.rightMargin = PADDING_OUTSIDE;
+                    params.rightMargin = 0;
                 }
                 holder.itemView.setLayoutParams(params);
                 ImageView img = (ImageView)holder.itemView.findViewById(R.id.sub_image);

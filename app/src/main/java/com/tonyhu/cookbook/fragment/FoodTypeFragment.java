@@ -35,8 +35,8 @@ import java.util.List;
 public class FoodTypeFragment extends Fragment {
     private final static String TYPE = "type";
     private final static String NAME = "name";
-    private final static int PADDING_OUTSIDE = 20;
-    private final static int PADDING_INSIDE = 10;
+    private final static int PADDING_OUTSIDE = ScreenUtil.dip2px(6);
+    private final static int PADDING_INSIDE = ScreenUtil.dip2px(3);
     private View rootView;
     private RecyclerView.Adapter adapter;
     private List<Category> categoryItems;
@@ -102,7 +102,7 @@ public class FoodTypeFragment extends Fragment {
                     params.rightMargin = PADDING_INSIDE;
                 } else {
                     params.leftMargin = PADDING_INSIDE;
-                    params.rightMargin = PADDING_OUTSIDE;
+                    params.rightMargin = 0;
                 }
                 holder.itemView.setLayoutParams(params);
                 ImageView img = (ImageView)holder.itemView.findViewById(R.id.sub_image);
